@@ -13,6 +13,7 @@ describe('The User Model', () => {
             await Users.insert({name: 'sam'});
             const users = await db('users');
             expect(users.length).toBe(1)
+            expect(res.type).toBe('application/json');
             expect(users[0].name).toBe('sam')
         })
 

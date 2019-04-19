@@ -2,7 +2,7 @@ const db = require('./../data/dbConfig');
 
 module.exports = {
     fetchAll,
-    // insert,
+    insert,
     // remove,
     // update
 }
@@ -10,3 +10,10 @@ module.exports = {
 async function fetchAll() {
     return db('users')
 }
+
+async function insert(user) {
+    const [id] = await db('users').insert(user);
+    
+    
+    return db('users').where({id}).first();
+ }

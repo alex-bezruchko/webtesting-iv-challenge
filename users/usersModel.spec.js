@@ -9,11 +9,11 @@ describe('The User Model', () => {
             return db('users').truncate()
         })
 
-        it('should insert single user', async () =>  {
+        it('should add one user', async () =>  {
             await Users.insert({name: 'sam'});
             const users = await db('users');
             expect(users.length).toBe(1)
-            expect(res.type).toBe('application/json');
+            // expect(users).toEqual('application/json');
             expect(users[0].name).toBe('sam')
         })
 

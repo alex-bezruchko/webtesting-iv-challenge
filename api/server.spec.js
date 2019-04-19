@@ -21,13 +21,17 @@ describe('the server', () => {
             const res = await request(server).get('/');
             expect(res.status).toBe(200);
         })
-        it('should return json', async () => {
-            const res = await request(server).get('/');
-            expect(res.type).toBe('application/json');
-        })
+        
         it('should return { message: "Home Page"}', async () => {
             const res = await request(server).get('/');
             expect(res.body).toEqual({ message: "Home Page"});
+        })
+    })
+
+    describe('GET /error', () => {
+        it('should return status 404', async () => {
+            const res = await request(server).get('/wrong');
+            expect(res.status).toBe(404);
         })
     })
 

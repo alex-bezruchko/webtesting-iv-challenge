@@ -13,9 +13,14 @@ describe('The User Model', () => {
             await Users.insert({name: 'sam'});
             const users = await db('users');
             expect(users.length).toBe(1)
-            // expect(users).toEqual('application/json');
             expect(users[0].name).toBe('sam')
         })
+
+        it('should insert single user and returns and id', async () =>  {
+            const user = await Users.insert({name: 'sam'});
+            expect(user.id).toBe(1)
+            expect(user.name).toBe('sam')
+        });
 
     })
 })

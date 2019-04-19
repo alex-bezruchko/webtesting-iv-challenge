@@ -36,5 +36,19 @@ describe('The User Model', () => {
             })
         })
 
+        describe('test delete a user method', () => {
+            it('should return all users', async () => {
+                const [id] = await db('users').insert([
+                    {name: 'joe'}
+                ])
+
+                await Users.remove(id);
+
+                const users = await Users.fetchAll();
+
+                expect(users.length).toBe(0)
+            })
+        })
+
     })
 })

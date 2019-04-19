@@ -1,5 +1,7 @@
+const express = require('express');
 const server = require('./server.js');
 const db = require('../data/dbConfig');
+server.use(express.json());
 
 const request = require('supertest');
 
@@ -32,6 +34,17 @@ describe('the server', () => {
         it('should return status 404', async () => {
             const res = await request(server).get('/wrong');
             expect(res.status).toBe(404);
+        })
+    })
+
+    
+    describe('GET / 500', () => {
+        it('should return status 500 on post', async () => {
+            const res = await request(server).get('/user');
+            await db('users').insert([
+                {name: 'joe', id: 1},
+            ])
+            expect(res.status).toBe(500);
         })
     })
 

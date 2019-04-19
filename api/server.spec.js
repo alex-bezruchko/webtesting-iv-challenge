@@ -31,4 +31,28 @@ describe('the server', () => {
         })
     })
 
+    describe('GET /users', () => {
+        it('should return json', async () => {
+            const res = await request(server).get('/users');
+            expect(res.status).toBe(200);
+            expect(res.type).toBe('application/json');
+            expect(res.body).toEqual([]);
+        })
+
+        it('should respond with all users in the db', async () => {
+            await db('users').insert([
+                {name: 'joe'},
+                {name: 'snow'},
+            ])
+
+            const res = await request(server).get('/users');
+            expect(res.body.length).toBe(2)
+            expect(res.status).toBe(200);
+            expect(res.body[0].name).toBe('joe')
+            expect(res.body[0].id).toBe(1)
+            expect(res.type).toBe('application/json');
+
+        })
+    })
+
 })
